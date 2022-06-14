@@ -15,7 +15,7 @@ class SearchBar extends Component{
     // return <input onChange={event=>console.log(event.target.value)} />;
     // We always manipulate our state with this.setState - we use this method to inform react that the state is changing
     return (
-    <div>
+    <div className="search-bar">
       <input 
         value = {this.state.term} // Become a "Controlled" field - because field value comes from state
         onChange={event=>this.setState({term: event.target.value})} />

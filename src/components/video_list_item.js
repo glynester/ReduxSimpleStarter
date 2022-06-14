@@ -1,11 +1,11 @@
 import React from 'react';
 
-// {title:video.snippet.title, key:video.id.videoId}
-const VideoListItem=({video})=>{
+// {video, onVideoSelect} - destructured from props
+const VideoListItem=({video, onVideoSelect})=>{
   const imgUrl=video.snippet.thumbnails.default.url;
   const alt=video.snippet.description;
   return (
-  <li className="list-group-item">
+  <li onClick={()=>onVideoSelect(video)} className="list-group-item">
     <div className="video-list media">
       <div className="media-left">
         <img className="media-object" src={imgUrl} alt={alt} />
