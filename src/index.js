@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -15,7 +16,7 @@ const YT_API_KEY=REACT_APP_YT_API_KEY;
 class App extends Component {
   constructor(props){
     super(props);
-
+    // state in react it's very component level (localized).
     this.state={ videos:[], selectedVideo: null };
 
     this.videoSearch('cute');
@@ -30,9 +31,15 @@ class App extends Component {
   }
 
   render(){
+    // Debounced (throttled) version of videoSearch
+    const videoSearch = _.debounce((term)=>{
+      this.videoSearch(term)
+    },300)
+
     return (
       <div>
-        <SearchBar onSearchTermChange={term=>this.videoSearch(term)} />
+        {/* <SearchBar onSearchTermChange={term=>this.videoSearch(term)} /> */}
+        <SearchBar onSearchTermChange={videoSearch} />
         {/* <VideoDetail video={this.state.videos[0]}/> */}
         <VideoDetail video={ this.state.selectedVideo } />
         <VideoList 
