@@ -18,18 +18,21 @@ class App extends Component {
 
     this.state={ videos:[], selectedVideo: null };
 
-    YTSearch( {key: REACT_APP_YT_API_KEY, term: 'monkeys'}, videos=>{
+    this.videoSearch('cute');
+  }
+
+  videoSearch(term){
+    YTSearch( {key: REACT_APP_YT_API_KEY, term: term}, videos=>{
       console.log(videos);
-      // this.setState({ videos: videos});
       this.setState({ videos: videos, selectedVideo: videos[0]});
-      // this.setState( {selectedVideo: this.state.videos[0]} );
       console.log('this.state',this.state);
     });
   }
+
   render(){
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={term=>this.videoSearch(term)} />
         {/* <VideoDetail video={this.state.videos[0]}/> */}
         <VideoDetail video={ this.state.selectedVideo } />
         <VideoList 
